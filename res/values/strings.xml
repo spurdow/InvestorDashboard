@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">InvestorDashboard</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="str_uname">Username</string>
+    <string name="null_val"></string>
+    <string name="str_password">Password</string>
+
+</resources>
