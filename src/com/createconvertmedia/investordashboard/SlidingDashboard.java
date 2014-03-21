@@ -1,6 +1,8 @@
 package com.createconvertmedia.investordashboard;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
+import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.MenuItem;
 import com.createconvertmedia.fragment.DummyFragment;
 import com.createconvertmedia.fragment.MenuListFragment;
@@ -16,9 +18,9 @@ public class SlidingDashboard extends SlidingFragmentActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.content_frame);
 		
-		getSupportFragmentManager().beginTransaction()
+/*		getSupportFragmentManager().beginTransaction()
 		.replace(R.id.content_frame	, new DummyFragment()).commit();
-		
+		*/
 		setBehindContentView(R.layout.menu_frame);
 		
 		getSupportFragmentManager().beginTransaction()
@@ -45,6 +47,11 @@ public class SlidingDashboard extends SlidingFragmentActivity{
 		return super.onOptionsItemSelected(item);
 	}
 	
+	public void replace(Fragment frag){
+		toggle();
+		getSupportFragmentManager().beginTransaction()
+		.replace(R.id.content_frame, frag).commit();
+	}
 	
 	
 	

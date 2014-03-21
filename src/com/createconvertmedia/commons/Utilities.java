@@ -14,17 +14,22 @@ import org.apache.http.ParseException;
 import org.apache.http.client.methods.HttpGet;
 
 import com.createconvertmedia.entity.Investor;
+import com.createconvertmedia.entity.LoginResult;
 import com.google.gson.Gson;
 
 
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.http.AndroidHttpClient;
 import android.util.Log;
+import android.view.View;
 
 public class Utilities {
 
@@ -125,6 +130,64 @@ public class Utilities {
 		
 		return result;
 	}
+	
+	public enum AlertType{
+		SUCCESS,
+		ERROR,
+		WARNING
+	}
+	/**
+	 * Message Builder
+	 * @param context
+	 * @param aType
+	 * @param message
+	 * @param title
+	 * @param icon
+	 * @param inflatedView
+	 * @return
+	 */
+	protected static AlertDialog.Builder alert(Context context, AlertType aType , String message , String title , int icon, View inflatedView ){
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		if(null != inflatedView){
+			builder.setView(inflatedView);
+			/*
+			 * add some text message area
+			 * and action onClick
+			 */
+		}else{
+			builder.setTitle(title).setMessage(message).setIcon(icon);
+			builder.setPositiveButton("Okay", new OnClickListener(){
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					dialog.dismiss();
+				}
+				
+			});
+		}
+		
+		return builder;
+	}
+	/**
+	 * Success Message Builder
+	 * @param context
+	 * @param message
+	 * @return
+	 */
+	public static AlertDialog.Builder success(Context context, String message){
+		return alert(context , AlertType.SUCCESS , message, "Success" , android.R.drawable.checkbox_on_background , null);
+	}
+	/**
+	 * Error Message Builder
+	 * @param context
+	 * @param message
+	 * @return
+	 */
+	public static AlertDialog.Builder error(Context context , String message){
+		return alert(context , AlertType.ERROR , message, "Error" , android.R.drawable.checkbox_off_background , null);
+	}
+	
 	/**
 	 * check whether it is first launched
 	 * @param context
@@ -147,12 +210,12 @@ public class Utilities {
 	 * @param context
 	 * @param investor
 	 */
-	public static void saveLoginDetails(Context context, Investor investor){
+	public static void saveLoginDetails(Context context , LoginResult lResult){
 		SharedPreferences shared = getPreferences(context);
 		SharedPreferences.Editor editor = shared.edit();
 		Gson gson = new Gson();
-		String to_json = gson.toJson(investor);
-		editor.putString("investor", to_json);
+		String to_json = gson.toJson(lResult);
+		editor.putString("LoginResult", to_json);
 		editor.commit();
 	}
 	/**
@@ -160,12 +223,12 @@ public class Utilities {
 	 * @param context
 	 * @return
 	 */
-	public static Investor getLoginDetails(Context context){
+	public static LoginResult getLoginDetails(Context context){
 		SharedPreferences shared = getPreferences(context);
 		Gson gson = new Gson();
-		String from_json = shared.getString("investors", "");
-		Investor investor = gson.fromJson(from_json, Investor.class);
-		return investor;
+		String from_json = shared.getString("LoginResult", "");
+		LoginResult result = gson.fromJson(from_json, LoginResult.class);
+		return result;
 	}
 	
 	/**

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.createconvertmedia.commons.AfterTextChanged;
 import com.createconvertmedia.commons.Utilities;
+import com.createconvertmedia.entity.LoginResult;
 import com.createconvertmedia.entry.KVEntry;
 import com.createconvertmedia.iface.ISwipeGesture;
 import com.createconvertmedia.tasks.LoginRequestTask;
@@ -64,6 +65,14 @@ public class SplashActivity extends Activity implements OnTouchListener{
 		
 
 		if(checkPlayServices()){
+			LoginResult lResult = Utilities.getLoginDetails(this);
+			
+			
+			if( lResult != null && lResult.getStatus()!= null && lResult.getStatus().equals("success")){
+				Intent i = new Intent(this , SlidingDashboard.class);
+				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(i);
+			}
 			
 			gesture = new GestureDetector(new GestureOpenListener());
 			
@@ -148,11 +157,7 @@ public class SplashActivity extends Activity implements OnTouchListener{
 		@Override
 		public void swipeUp() {
 			// TODO Auto-generated method stub
-			
 			error = false;
-			
-
-
 			LayoutInflater inflater = LayoutInflater.from(SplashActivity.this);
 			View dialogview = inflater.inflate(R.layout.login_layout, null);
 			
@@ -256,16 +261,9 @@ public class SplashActivity extends Activity implements OnTouchListener{
 				}
 				   
 			 });
-					
-
-			   
 			dialog.show();
-			   
-			   
 			Log.d(TAG, "Swipe Up");
 		}
-        
-        
     	
     }
 	@Override
