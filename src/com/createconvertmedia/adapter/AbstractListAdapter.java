@@ -2,6 +2,7 @@ package com.createconvertmedia.adapter;
 
 import java.util.List;
 
+import com.createconvertmedia.dbentity.DatabaseHandler;
 import com.createconvertmedia.iface.IGeneric;
 
 import android.content.Context;
@@ -83,6 +84,7 @@ public abstract class AbstractListAdapter<E> extends BaseAdapter implements
 		// TODO Auto-generated method stub
 		return lists.get(position);
 	}
+
 	
 	
 

@@ -187,18 +187,49 @@ public class Utilities {
 	public static AlertDialog.Builder error(Context context , String message){
 		return alert(context , AlertType.ERROR , message, "Error" , android.R.drawable.checkbox_off_background , null);
 	}
+	/**
+	 * launch keys
+	 * @author Admin
+	 *
+	 */
+	public enum LaunchKey{
+		
+		APP_LAUNCH("app_launch"),
+		DASHBOARD_LAUNCH("investor_dashboard_launch"),
+		TRANSACTION_LAUNCH("transaction_launch"),
+		DOWNLOAD_LAUNCH("download_launch"),
+		INVESTOR_UPDATES_LAUNCH("investor_updates_launch"),
+		MESSAGES_LAUNCH("message_launch"),
+		
+		;
+		
+		private String key;
+		private LaunchKey(String key){
+			this.key = key;
+		}
+		public String getKey(){return key;}
+	}
 	
 	/**
 	 * check whether it is first launched
 	 * @param context
 	 * @return
 	 */
-	public static boolean isFirstLaunched(Context context){
+	public static boolean isAppFirstLaunched(Context context){
+		return isFirstLaunched(context , LaunchKey.APP_LAUNCH);
+	}
+	/**
+	 * check whether key is first launched
+	 * in preferences
+	 * @param context
+	 * @param key
+	 * @return
+	 */
+	public static boolean isFirstLaunched(Context context, LaunchKey key){
 		SharedPreferences pref = getPreferences(context);
-		if(!pref.contains("first_launched")){
+		if(pref.getBoolean(key.getKey() , true)){
 			SharedPreferences.Editor editor = pref.edit();
-			editor.putBoolean("first_launched", true);
-			editor.commit();
+			editor.putBoolean(key.getKey(), true).commit();
 			return false;
 		}
 		return true;

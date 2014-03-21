@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.createconvertmedia.entity.Transaction;
 import com.createconvertmedia.entity.Withdrawal;
+import com.createconvertmedia.iface.IAdapterActions;
 import com.createconvertmedia.investordashboard.R;
 
 import android.content.Context;
@@ -12,8 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class WithdrawListAdapter extends AbstractListAdapter<Withdrawal> {
+public class WithdrawListAdapter extends AbstractListAdapter<Withdrawal> implements IAdapterActions<Withdrawal>{
 
 	private LayoutInflater inflater;
 	
@@ -60,6 +62,32 @@ public class WithdrawListAdapter extends AbstractListAdapter<Withdrawal> {
 		TextView wh_comment;
 		TextView wh_request_date;
 		TextView wh_reply_date;
+	}
+
+	@Override
+	public void add(Withdrawal e) {
+		// TODO Auto-generated method stub
+		getList().add(e);
+		notifyDataSetChanged();
+	}
+
+	@Override
+	public void delete(int index, long id) {
+		// TODO Auto-generated method stub
+		getList().remove(index);
+		notifyDataSetChanged();
+	}
+
+	@Override
+	public void update(int pos, Withdrawal object) {
+		// TODO Auto-generated method stub
+		Toast.makeText(getContext(), "Not yet implemented", Toast.LENGTH_LONG).show();
+	}
+
+	@Override
+	public List<Withdrawal> getAll() {
+		// TODO Auto-generated method stub
+		return getList();
 	}
 
 }

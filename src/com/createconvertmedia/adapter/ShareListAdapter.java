@@ -2,24 +2,32 @@ package com.createconvertmedia.adapter;
 
 import java.util.List;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.createconvertmedia.dbentity.DatabaseHandler;
+import com.createconvertmedia.dbentity.ShareHelper;
 import com.createconvertmedia.entity.Share;
+import com.createconvertmedia.iface.IAdapterActions;
+import com.createconvertmedia.iface.IGeneric;
 import com.createconvertmedia.investordashboard.R;
 
-public class ShareListAdapter extends AbstractListAdapter<Share>{
+public class ShareListAdapter extends AbstractListAdapter<Share> implements IAdapterActions<Share> , IGeneric<Share>{
 	
 	private LayoutInflater inflater;
-	
+
 	public ShareListAdapter(Context context, List<Share> lists) {
 		super(context, lists);
 		// TODO Auto-generated constructor stub
 		inflater = LayoutInflater.from(context);
+
 	}
 
 	@Override
@@ -56,5 +64,32 @@ public class ShareListAdapter extends AbstractListAdapter<Share>{
 		TextView sh_share_value;
 		TextView sh_total_share_purchased;
 		TextView sh_date;
+	}
+
+	@Override
+	public void add(Share e) {
+		// TODO Auto-generated method stub
+		getList().add(e);
+		notifyDataSetChanged();
+	}
+
+	@Override
+	public void delete(int index , long id ) {
+		// TODO Auto-generated method stub
+		getList().remove(index);
+		notifyDataSetChanged();
+	}
+
+	@Override
+	public void update(int pos, Share object) {
+		// TODO Auto-generated method stub
+
+		Toast.makeText(getContext(), "Not yet implemented!", Toast.LENGTH_LONG).show();
+	}
+
+	@Override
+	public List<Share> getAll() {
+		// TODO Auto-generated method stub
+		return getList();
 	}
 }

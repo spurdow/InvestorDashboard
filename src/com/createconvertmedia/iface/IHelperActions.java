@@ -1,5 +1,7 @@
 package com.createconvertmedia.iface;
 
+import java.util.List;
+
 
 public interface IHelperActions<T> {
 	
@@ -17,7 +19,7 @@ public interface IHelperActions<T> {
 	 * @param object
 	 * @return
 	 */
-	public boolean update(long id , T object);
+	public int update(long id , T object);
 	
 	/**
 	 * note: should never used , never to delete data from database
@@ -26,7 +28,13 @@ public interface IHelperActions<T> {
 	 * @param object
 	 * @return
 	 */
-	public T delete(long id , T object);
-
+	public int delete(long id );
 	
+	/**
+	 * reutnrs all objects of this type
+	 * @return
+	 */
+	public List<T> getAll();
+	
+	public List<T> getAllByLimit(int offset , int limit);
 }

@@ -1265,7 +1265,7 @@ containing a value of this type.
     public static final class id {
         public static final int LinearLayout1=0x7f05004a;
         public static final int RelativeLayout1=0x7f05003d;
-        public static final int TextView02=0x7f050063;
+        public static final int TextView02=0x7f050066;
         public static final int abs__action_bar=0x7f050029;
         public static final int abs__action_bar_container=0x7f050028;
         public static final int abs__action_bar_subtitle=0x7f05001a;
@@ -1305,7 +1305,7 @@ containing a value of this type.
         public static final int abs__textButton=0x7f05001c;
         public static final int abs__title=0x7f050024;
         public static final int abs__up=0x7f05000f;
-        public static final int action_settings=0x7f050065;
+        public static final int action_settings=0x7f050068;
         public static final int btn_login=0x7f050043;
         public static final int content_frame=0x7f05003c;
         public static final int content_progressbar=0x7f05003e;
@@ -1333,24 +1333,27 @@ containing a value of this type.
         public static final int menu_progressbar=0x7f050045;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
+        public static final int pd_created=0x7f050056;
+        public static final int pd_image=0x7f050057;
+        public static final int pd_title=0x7f050055;
         public static final int right=0x7f050015;
         public static final int satellite=0x7f050002;
         public static final int selected_view=0x7f050018;
-        public static final int sh_amount=0x7f050056;
-        public static final int sh_date=0x7f05005c;
-        public static final int sh_share_value=0x7f050058;
-        public static final int sh_total_share_purchased=0x7f05005a;
+        public static final int sh_amount=0x7f050059;
+        public static final int sh_date=0x7f05005f;
+        public static final int sh_share_value=0x7f05005b;
+        public static final int sh_total_share_purchased=0x7f05005d;
         public static final int showCustom=0x7f05000c;
         public static final int showHome=0x7f050009;
         public static final int showTitle=0x7f05000b;
-        public static final int slidingmenumain=0x7f05005d;
+        public static final int slidingmenumain=0x7f050060;
         public static final int splashscreen_child_layout=0x7f05003b;
         public static final int tabMode=0x7f050007;
         public static final int terrain=0x7f050003;
-        public static final int textView3=0x7f050055;
-        public static final int textView5=0x7f050057;
-        public static final int textView7=0x7f050059;
-        public static final int textView9=0x7f05005b;
+        public static final int textView3=0x7f050058;
+        public static final int textView5=0x7f05005a;
+        public static final int textView7=0x7f05005c;
+        public static final int textView9=0x7f05005e;
         public static final int txt_menu_name=0x7f050047;
         public static final int txt_menu_notif=0x7f050046;
         public static final int txt_password_login=0x7f050041;
@@ -1358,12 +1361,12 @@ containing a value of this type.
         public static final int txt_uname=0x7f05003f;
         public static final int txt_uname_error=0x7f050040;
         public static final int useLogo=0x7f050008;
-        public static final int wh_amount=0x7f05005e;
-        public static final int wh_comment=0x7f050060;
-        public static final int wh_date=0x7f050062;
-        public static final int wh_reply_date=0x7f050064;
-        public static final int wh_request_date=0x7f050061;
-        public static final int wh_status=0x7f05005f;
+        public static final int wh_amount=0x7f050061;
+        public static final int wh_comment=0x7f050063;
+        public static final int wh_date=0x7f050065;
+        public static final int wh_reply_date=0x7f050067;
+        public static final int wh_request_date=0x7f050064;
+        public static final int wh_status=0x7f050062;
         public static final int wrap_content=0x7f050005;
     }
     public static final class integer {
@@ -1400,11 +1403,12 @@ containing a value of this type.
         public static final int menu_layout=0x7f03001a;
         public static final int menu_list_row=0x7f03001b;
         public static final int my_account=0x7f03001c;
-        public static final int share_history_row=0x7f03001d;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001e;
-        public static final int sherlock_spinner_item=0x7f03001f;
-        public static final int slidingmenumain=0x7f030020;
-        public static final int withdraw_history_row=0x7f030021;
+        public static final int pdf_download_row=0x7f03001d;
+        public static final int share_history_row=0x7f03001e;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001f;
+        public static final int sherlock_spinner_item=0x7f030020;
+        public static final int slidingmenumain=0x7f030021;
+        public static final int withdraw_history_row=0x7f030022;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;

@@ -15,7 +15,7 @@ public interface IAdapterActions<T> {
 	/*
 	 *  remove objects to the list
 	 */
-	public void delete(int index);
+	public void delete(int index , long id);
 	/*
 	 *  update objects
 	 */

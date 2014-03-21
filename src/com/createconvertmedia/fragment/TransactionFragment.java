@@ -4,28 +4,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.commonsware.cwac.merge.MergeAdapter;
 import com.createconvertmedia.adapter.ShareListAdapter;
 import com.createconvertmedia.adapter.WithdrawListAdapter;
+import com.createconvertmedia.commons.Utilities;
+import com.createconvertmedia.commons.Utilities.LaunchKey;
+import com.createconvertmedia.dbentity.ShareHelper;
+import com.createconvertmedia.dbentity.WithdrawalHelper;
+import com.createconvertmedia.entity.LoginResult;
 import com.createconvertmedia.entity.Share;
+import com.createconvertmedia.entity.User;
 import com.createconvertmedia.entity.Withdrawal;
+import com.createconvertmedia.entry.KVEntry;
+import com.createconvertmedia.iface.NotifyUpdate;
 import com.createconvertmedia.investordashboard.R;
+import com.createconvertmedia.tasks.TransactionRequestTask;
 
 
-public class TransactionFragment extends SherlockListFragment{
+public class TransactionFragment extends SherlockListFragment implements NotifyUpdate{
 
+	private static final String TAG = TransactionFragment.class.getSimpleName();
+	private WithdrawListAdapter wAdapter;
+	private ShareListAdapter sAdapter;
+	private ProgressBar progress;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		return inflater.inflate(R.layout.content_layout, container , false);
+		View view = inflater.inflate(R.layout.content_layout, container , false);
+		progress = (ProgressBar) view.findViewById(R.id.content_progressbar);
+		return view;
 	}
 
 	@Override
@@ -36,21 +53,10 @@ public class TransactionFragment extends SherlockListFragment{
 		
 
 		List<Withdrawal> withdrawals = new ArrayList<Withdrawal>();
-		withdrawals.add(new Withdrawal(1,1,22,"type" , 10.00 , "date" , "status" , "comment" , "reply date" , "created" , "modified" , 1));
-		withdrawals.add(new Withdrawal(2,2,22,"type" , 10.00 , "date" , "status" , "comment" , "reply date" , "created" , "modified" , 1));
-		withdrawals.add(new Withdrawal(3,3,22,"type" , 10.00 , "date" , "status" , "comment" , "reply date" , "created" , "modified" , 1));
-		withdrawals.add(new Withdrawal(4,4,22,"type" , 10.00 , "date" , "status" , "comment" , "reply date" , "created" , "modified" , 1));
-		withdrawals.add(new Withdrawal(5,5,22,"type" , 10.00 , "date" , "status" , "comment" , "reply date" , "created" , "modified" , 1));
-		withdrawals.add(new Withdrawal(6,6,22,"type" , 10.00 , "date" , "status" , "comment" , "reply date" , "created" , "modified" , 1));
-		WithdrawListAdapter wAdapter =  new WithdrawListAdapter(this.getActivity().getApplicationContext() , withdrawals);
+		wAdapter =  new WithdrawListAdapter(this.getActivity().getApplicationContext() , withdrawals);
 		
 		List<Share> shares = new ArrayList<Share>();
-		shares.add(new Share(1,1,22,10000,0.25,1000,"date","created","modified" ,1));
-		shares.add(new Share(2,2,22,10000,0.25,1000,"date","created","modified" ,1));
-		shares.add(new Share(3,3,22,10000,0.25,1000,"date","created","modified" ,1));
-		shares.add(new Share(4,4,22,10000,0.25,1000,"date","created","modified" ,1));
-		shares.add(new Share(5,5,22,10000,0.25,1000,"date","created","modified" ,1));
-		ShareListAdapter sAdapter = new ShareListAdapter(this.getActivity().getApplicationContext() ,shares);
+		sAdapter = new ShareListAdapter(this.getActivity().getApplicationContext() ,shares);
 		
 		merge.addView(addTitleView("Transaction History"));
 		merge.addAdapter(sAdapter);
@@ -58,11 +64,31 @@ public class TransactionFragment extends SherlockListFragment{
 		merge.addAdapter(wAdapter);
 		
 		setListAdapter(merge);
-		
+		if(Utilities.isFirstLaunched(getActivity(), LaunchKey.TRANSACTION_LAUNCH)){
+			Log.d(TAG, Utilities.isFirstLaunched(getActivity(), LaunchKey.TRANSACTION_LAUNCH) +" = ???");
+			TransactionRequestTask task = new TransactionRequestTask(this.getActivity(), merge);
+			task.setNotify(this);
+			LoginResult lResult = Utilities.getLoginDetails(getActivity());
+			User user = lResult.getUser();
+			
+			KVEntry<String, String> android = new KVEntry<String, String>(Utilities.CLIENT , "1");
+			KVEntry<String, String> what	 = new KVEntry<String, String>(Utilities.WHAT , "transaction");
+			KVEntry<String, String> user_id	 = new KVEntry<String, String>("user_id" , user.getServer_u_id()+"");
+			task.execute(android, what , user_id);
+		}else{
+			fire_update();
+		}
+
+
 		super.onActivityCreated(savedInstanceState);
 	}
 	
-	
+	/**
+	 * add title to the merged adapters
+	 * 
+	 * @param title
+	 * @return
+	 */
 	private View addTitleView(String title){
 		TextView textView = new TextView(getActivity());
 		
@@ -71,7 +97,25 @@ public class TransactionFragment extends SherlockListFragment{
 		textView.setGravity(Gravity.CENTER);
 		textView.setHeight(50);
 		
+		
 		return textView;
+	}
+
+	@Override
+	public void fire_update() {
+		// TODO Auto-generated method stub
+		ShareHelper sHelper = new ShareHelper(getActivity());
+		for(Share share : sHelper.getAll()){
+			sAdapter.add(share);
+		}
+		
+		WithdrawalHelper wHelper = new WithdrawalHelper(getActivity());
+		for(Withdrawal withdraw : wHelper.getAll()){
+			wAdapter.add(withdraw);
+		}
+		
+		progress.setVisibility(View.INVISIBLE);
+		
 	}
 	
 }

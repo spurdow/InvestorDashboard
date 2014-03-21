@@ -38,7 +38,7 @@ public class Share extends Transaction {
 		public String TABLE = "Share_transaction_history";
 		
 		public String CREATE_TABLE = "CREATE TABLE " + TABLE + " ( " + ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " 
-				+  SERVER_ID + " INTEGER , " + SERVER_AMOUNT_INVESTED + " INTEGER , " + SERVER_SHARE_VALUE + " REAL , " 
+				+  SERVER_ID + " INTEGER UNIQUE, " + SERVER_AMOUNT_INVESTED + " INTEGER , " + SERVER_SHARE_VALUE + " REAL , " 
 				+  SERVER_TOTAL_SHARE_PURCHASED + " INTEGER , " + SERVER_SHARED_ADDED_DATE + " TEXT , "  + SERVER_CREATED + " TEXT , "
 				+  SERVER_MODIFIED + " TEXT , " + SERVER_STATUS + " INTEGER );";
 		

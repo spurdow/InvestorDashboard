@@ -97,13 +97,12 @@ public class MenuListFragment extends SherlockListFragment implements OnItemClic
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
-		Fragment fragment = null;
 		switch(arg2){
-		case 2 : fragment = new TransactionFragment(); break;
-		
+		case 2 : ((SlidingDashboard) this.getActivity()).replace(new TransactionFragment()); break;
+		case 3 : ((SlidingDashboard) this.getActivity()).replace(new TransactionFragment()); break;
 		}
 		
-		((SlidingDashboard) this.getActivity()).replace(fragment);
+		
 	}
 	
 	

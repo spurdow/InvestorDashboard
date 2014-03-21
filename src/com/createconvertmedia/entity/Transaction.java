@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Transaction {
 	
-	private long id;
+	private long c_id;
 	
 	@SerializedName("id")
 	private long server_id;
@@ -16,17 +16,17 @@ public class Transaction {
 	
 	public Transaction(long id, long server_id, long server_user_id) {
 		super();
-		this.id = id;
+		this.c_id = id;
 		this.server_id = server_id;
 		this.server_user_id = server_user_id;
 	}
 
 	public long getId() {
-		return id;
+		return c_id;
 	}
 
 	public void setId(long id) {
-		this.id = id;
+		this.c_id = id;
 	}
 
 	public long getServer_id() {
