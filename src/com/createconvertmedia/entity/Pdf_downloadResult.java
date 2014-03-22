@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Pdf_downloadResult extends Result{
 	
-	@SerializedName("pdfs")
+	@SerializedName("pdf")
 	private List<Pdf_download> pdfs;
 	
 	

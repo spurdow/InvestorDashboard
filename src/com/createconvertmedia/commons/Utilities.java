@@ -34,7 +34,7 @@ import android.view.View;
 public class Utilities {
 
 	
-	public final static String HOST = "http://192.168.1.3/ccinvestors";
+	public final static String HOST = "http://ccinvestors.ngrok.com/ccinvestors";
 	
 	public final static String ANDROID_FOLDER = "android";
 	
@@ -148,7 +148,7 @@ public class Utilities {
 	 */
 	protected static AlertDialog.Builder alert(Context context, AlertType aType , String message , String title , int icon, View inflatedView ){
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		if(null != inflatedView){
+		if( inflatedView != null ){
 			builder.setView(inflatedView);
 			/*
 			 * add some text message area
@@ -227,12 +227,12 @@ public class Utilities {
 	 */
 	public static boolean isFirstLaunched(Context context, LaunchKey key){
 		SharedPreferences pref = getPreferences(context);
-		if(pref.getBoolean(key.getKey() , true)){
+		if(!pref.contains(key.getKey())){
 			SharedPreferences.Editor editor = pref.edit();
 			editor.putBoolean(key.getKey(), true).commit();
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	

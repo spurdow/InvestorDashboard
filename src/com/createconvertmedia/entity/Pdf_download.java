@@ -16,6 +16,26 @@ public class Pdf_download {
 	server_status 						integer
 	 */
 	
+	public final static class DatabaseKey{
+		public String ID = "id";
+		public String SERVER_ID = "server_id";
+		public String SERVER_PDF_TITLE = "server_pdf_title";
+		public String SERVER_PDF_FILE_NAME = "server_pdf_file_name";
+		public String SERVER_PDF_ORIGINAL_NAME = "server_pdf_original_name";
+		public String SERVER_CREATED = "server_created";
+		public String SERVER_MODIFIED = "server_modified";
+		public String SERVER_STATUS = "server_status";
+		
+		public String TABLE = "Pdf_download";
+		public String CREATE_TABLE = "CREATE TABLE " + TABLE + " ( " + ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
+				+ SERVER_ID + " INTEGER UNIQUE , " + SERVER_PDF_TITLE + " TEXT , " + SERVER_PDF_FILE_NAME + " TEXT, "
+				+ SERVER_PDF_ORIGINAL_NAME + " TEXT , " + SERVER_CREATED + " TEXT , " + SERVER_MODIFIED + " TEXT , "
+				+ SERVER_STATUS + " INTEGER );";
+		public String INDEX = "CREATE INDEX " + TABLE + "_" + SERVER_ID + "x ON " + TABLE + "(" + SERVER_ID + ");"   ;
+		
+		public String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE;
+	}
+	
 	private long c_id;
 	
 	@SerializedName("id")
@@ -53,6 +73,10 @@ public class Pdf_download {
 		this.server_created = server_created;
 		this.server_modified = server_modified;
 		this.server_status = server_status;
+	}
+
+	public Pdf_download() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public long getC_id() {

@@ -42,6 +42,7 @@ public class TransactionFragment extends SherlockListFragment implements NotifyU
 		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.content_layout, container , false);
 		progress = (ProgressBar) view.findViewById(R.id.content_progressbar);
+		progress.setVisibility(View.VISIBLE);
 		return view;
 	}
 

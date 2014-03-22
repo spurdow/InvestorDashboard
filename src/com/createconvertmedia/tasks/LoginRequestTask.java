@@ -89,7 +89,7 @@ public class LoginRequestTask extends AsyncTask<KVEntry<String,String> , String 
 				client.close();
 			}
 		}
-		
+		dialog.dismiss();
 		return result;
 	}
 
@@ -101,14 +101,13 @@ public class LoginRequestTask extends AsyncTask<KVEntry<String,String> , String 
 			Gson gson = new Gson();;
 			LoginResult result_fromjson = gson.fromJson(result, LoginResult.class);
 			if(result_fromjson.getStatus().equals("success")){
-				dialog.dismiss();
+				
 				Utilities.saveLoginDetails(mContext, result_fromjson);
 				Intent i = new Intent(mContext , SlidingDashboard.class);
 				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
 				mContext.startActivity(i);
 				
 			}else{
-				dialog.dismiss();
 				AlertDialog.Builder builder = Utilities.error(mContext, "Username or Password is incorrect");
 				final AlertDialog alert = builder.create();
 				alert.show();

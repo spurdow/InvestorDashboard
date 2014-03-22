@@ -99,7 +99,7 @@ public class MenuListFragment extends SherlockListFragment implements OnItemClic
 		// TODO Auto-generated method stub
 		switch(arg2){
 		case 2 : ((SlidingDashboard) this.getActivity()).replace(new TransactionFragment()); break;
-		case 3 : ((SlidingDashboard) this.getActivity()).replace(new TransactionFragment()); break;
+		case 3 : ((SlidingDashboard) this.getActivity()).replace(new DownloadFragment()); break;
 		}
 		
 		
