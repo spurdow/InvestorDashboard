@@ -36,6 +36,11 @@ public class Utilities {
 	
 	public final static String HOST = "http://ccinvestors.ngrok.com/ccinvestors";
 	
+	/**
+	 *  sender id of the gcm 
+	 */
+	public final static String SENDER_ID = "601886556185";
+	
 	public final static String ANDROID_FOLDER = "android";
 	
 	public final static String CLIENT = "android_client";
@@ -43,6 +48,14 @@ public class Utilities {
 	public final static String WHAT = "what";
 	
 	private static final String TAG = "Utilities";
+	
+	public static final int NOTIF_DASHBOARD = 0x01;
+	
+	public static final int NOTIF_HISTORY = 0x02;
+	
+	public static final int NOTIF_DOWNLOADS = 0x03;
+	
+	
 	
 	/** 
 	 * static bitmap downloader
@@ -235,7 +248,11 @@ public class Utilities {
 		return false;
 	}
 	
-	
+	public static void removeLoginDetails(Context context ){
+		SharedPreferences shared = getPreferences(context);
+		SharedPreferences.Editor editor = shared.edit();
+		editor.remove("LoginResult").commit();
+	}
 	/**
 	 * saving login details for investor
 	 * @param context
@@ -327,6 +344,21 @@ public class Utilities {
 	     else
 	        return false;
 	}
+	/**
+	 * 
+	 * @param mContext
+	 */
+	public static void saveRegistrationKey(Context mContext , String regid) {
+		// TODO Auto-generated method stub
+		SharedPreferences pref = getPreferences(mContext);
+		SharedPreferences.Editor edit = pref.edit();
+		
+		edit.putString("regid", regid ).commit();
+	}
 	
+	public static boolean isRegistrationKeyExist(Context context){
+		SharedPreferences pref = getPreferences(context);
+		return pref.contains("regid");
+	}
 	
 }

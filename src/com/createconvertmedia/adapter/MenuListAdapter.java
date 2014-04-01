@@ -50,11 +50,9 @@ public class MenuListAdapter extends AbstractListAdapter<Menu>{
 		int count = getObject(position).getNotif_no();
 		if(count > 0 ){
 			vHolder.notify.setText(String.valueOf(count));
-			vHolder.notify.setBadgePosition(BadgeView.POSITION_CENTER);
+			vHolder.notify.setBadgePosition(BadgeView.POSITION_BOTTOM_LEFT);
 			vHolder.notify.show();
 		}
-		
-		
 		return child;
 	}
 	

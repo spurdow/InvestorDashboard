@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/item_search" android:actionViewClass="com.actionbarsherlock.widget.SearchView" android:showAsAction="always" android:icon="@android:drawable/ic_menu_search"></item><item android:id="@+id/item_more" android:icon="@drawable/abs__ic_menu_moreoverflow_holo_light" android:showAsAction="always">
+        <menu>
+            <item android:id="@+id/item_settings" android:title="Settings" android:showAsAction="withText" android:icon="@android:drawable/ic_menu_preferences"/>
+            <item android:id="@+id/item_logout" android:title="Logout" android:showAsAction="withText"/>
+        </menu>
+    </item>
+    
+    
+
+</menu>

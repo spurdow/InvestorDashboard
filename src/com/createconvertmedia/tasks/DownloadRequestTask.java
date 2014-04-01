@@ -17,7 +17,7 @@ import com.createconvertmedia.dbentity.DownloadHelper;
 import com.createconvertmedia.entity.Pdf_download;
 import com.createconvertmedia.entity.Pdf_downloadResult;
 import com.createconvertmedia.entry.KVEntry;
-import com.createconvertmedia.iface.NotifyUpdate;
+import com.createconvertmedia.iface.INotifyUpdate;
 import com.google.gson.Gson;
 
 import android.content.Context;
@@ -32,7 +32,7 @@ public class DownloadRequestTask extends AsyncTask<KVEntry<String,String> , Stri
 
 	
 	private Context mContext;
-	private NotifyUpdate notifier;
+	private INotifyUpdate notifier;
 	public DownloadRequestTask(Context context){
 		this.mContext = context;
 	}
@@ -97,11 +97,11 @@ public class DownloadRequestTask extends AsyncTask<KVEntry<String,String> , Stri
 		super.onPostExecute(result);
 	}
 
-	public NotifyUpdate getNotifier() {
+	public INotifyUpdate getNotifier() {
 		return notifier;
 	}
 
-	public void setNotifier(NotifyUpdate notifier) {
+	public void setNotifier(INotifyUpdate notifier) {
 		this.notifier = notifier;
 	}
 

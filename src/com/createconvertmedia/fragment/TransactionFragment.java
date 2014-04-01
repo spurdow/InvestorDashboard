@@ -25,12 +25,12 @@ import com.createconvertmedia.entity.Share;
 import com.createconvertmedia.entity.User;
 import com.createconvertmedia.entity.Withdrawal;
 import com.createconvertmedia.entry.KVEntry;
-import com.createconvertmedia.iface.NotifyUpdate;
+import com.createconvertmedia.iface.INotifyUpdate;
 import com.createconvertmedia.investordashboard.R;
 import com.createconvertmedia.tasks.TransactionRequestTask;
 
 
-public class TransactionFragment extends SherlockListFragment implements NotifyUpdate{
+public class TransactionFragment extends SherlockListFragment implements INotifyUpdate{
 
 	private static final String TAG = TransactionFragment.class.getSimpleName();
 	private WithdrawListAdapter wAdapter;
@@ -40,6 +40,7 @@ public class TransactionFragment extends SherlockListFragment implements NotifyU
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		this.setHasOptionsMenu(true);
 		View view = inflater.inflate(R.layout.content_layout, container , false);
 		progress = (ProgressBar) view.findViewById(R.id.content_progressbar);
 		progress.setVisibility(View.VISIBLE);

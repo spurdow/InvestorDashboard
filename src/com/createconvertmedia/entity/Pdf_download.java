@@ -27,7 +27,7 @@ public class Pdf_download {
 		public String SERVER_STATUS = "server_status";
 		
 		public String TABLE = "Pdf_download";
-		public String CREATE_TABLE = "CREATE TABLE " + TABLE + " ( " + ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
+		public String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE + " ( " + ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
 				+ SERVER_ID + " INTEGER UNIQUE , " + SERVER_PDF_TITLE + " TEXT , " + SERVER_PDF_FILE_NAME + " TEXT, "
 				+ SERVER_PDF_ORIGINAL_NAME + " TEXT , " + SERVER_CREATED + " TEXT , " + SERVER_MODIFIED + " TEXT , "
 				+ SERVER_STATUS + " INTEGER );";

@@ -232,7 +232,9 @@ public class SplashActivity extends Activity implements OnTouchListener{
 						KVEntry<String, String> what	 = new KVEntry<String, String>(Utilities.WHAT , "login");
 						KVEntry<String, String> username	 = new KVEntry<String, String>("username" , list.get(0));
 						KVEntry<String, String> password	 = new KVEntry<String, String>("password" , list.get(1));
-						new LoginRequestTask(SplashActivity.this).execute(android, what, username, password);
+						LoginRequestTask t = new LoginRequestTask(SplashActivity.this);
+						t.setParentDialog(dialog);
+						t.execute(android, what, username, password);
 						
 						/*
 						 *  get the registration id if no reg id registered on the device

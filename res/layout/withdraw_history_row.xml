@@ -9,7 +9,7 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/txt_whos_earnings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/txt_compounding_share_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/txt_c_amount_earned"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

@@ -20,7 +20,7 @@ import com.createconvertmedia.entity.Share;
 import com.createconvertmedia.entity.TransactionResult;
 import com.createconvertmedia.entity.Withdrawal;
 import com.createconvertmedia.entry.KVEntry;
-import com.createconvertmedia.iface.NotifyUpdate;
+import com.createconvertmedia.iface.INotifyUpdate;
 import com.google.gson.Gson;
 
 import android.content.Context;
@@ -37,7 +37,7 @@ public class TransactionRequestTask extends AsyncTask<KVEntry<String , String> ,
 	private MergeAdapter merge;
 	
 	
-	private NotifyUpdate notify;
+	private INotifyUpdate notify;
 	
 	public TransactionRequestTask(Context context, MergeAdapter merge){
 		this.mContext = context;
@@ -107,11 +107,11 @@ public class TransactionRequestTask extends AsyncTask<KVEntry<String , String> ,
 		super.onPostExecute(result);
 	}
 
-	public NotifyUpdate getNotify() {
+	public INotifyUpdate getNotify() {
 		return notify;
 	}
 
-	public void setNotify(NotifyUpdate notify) {
+	public void setNotify(INotifyUpdate notify) {
 		this.notify = notify;
 	}
 	

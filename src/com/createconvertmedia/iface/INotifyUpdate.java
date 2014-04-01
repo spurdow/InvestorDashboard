@@ -1,6 +1,6 @@
 package com.createconvertmedia.iface;
 
-public interface NotifyUpdate {
+public interface INotifyUpdate {
 	/**
 	 * notify call
 	 */

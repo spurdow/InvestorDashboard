@@ -38,7 +38,7 @@ public class Withdrawal extends Transaction {
 		
 		public String TABLE = "Withdrawal_transaction_history";
 		
-		public String CREATE_TABLE = "CREATE TABLE " + TABLE + " ( " + ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " 
+		public String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE + " ( " + ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " 
 				+ SERVER_ID + " INTEGER UNIQUE, " + SERVER_ACCOUNT_TYPE + " TEXT , " + SERVER_AMOUNT + " REAL, " + SERVER_REQUESTED_DATE + " TEXT , "
 				+ SERVER_WITHDRAWAL_STATUS + " TEXT , " + SERVER_COMMENT + " TEXT , " + SERVER_REPLY_DATE + " TEXT , " 
 				+ SERVER_CREATED + " TEXT , " + SERVER_MODIFIED + " TEXT , " + SERVER_STATUS + " INTEGER );" ;

@@ -18,18 +18,17 @@
 -->
 
 <resources>
-
+    
     <style name="Theme.Investordashboard" parent="@style/Theme.Sherlock.Light">
         <item name="actionBarItemBackground">@drawable/selectable_background_investordashboard</item>
         <item name="popupMenuStyle">@style/PopupMenu.Investordashboard</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Investordashboard</item>
-        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Investordashboard</item>
+        <item name="actionBarStyle">@style/ActionBarTabStyle.Investordashboard</item>
         <item name="actionDropDownStyle">@style/DropDownNav.Investordashboard</item>
         <item name="actionBarStyle">@style/ActionBar.Solid.Investordashboard</item>
         <item name="actionModeBackground">@drawable/cab_background_top_investordashboard</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_investordashboard</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Investordashboard</item>
-
         
     </style>
 

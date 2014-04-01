@@ -13,7 +13,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.createconvertmedia.commons.Utilities;
+import com.createconvertmedia.dbentity.ProjectHelper;
 import com.createconvertmedia.entity.LoginResult;
+import com.createconvertmedia.entity.Project;
 import com.createconvertmedia.entity.Result;
 import com.createconvertmedia.entry.KVEntry;
 import com.createconvertmedia.investordashboard.SlidingDashboard;
@@ -39,9 +41,6 @@ public class LoginRequestTask extends AsyncTask<KVEntry<String,String> , String 
 		// TODO Auto-generated constructor stub
 		this.mContext = context;
 	}
-
-	
-	
 
 	@Override
 	protected void onPreExecute() {
@@ -89,7 +88,7 @@ public class LoginRequestTask extends AsyncTask<KVEntry<String,String> , String 
 				client.close();
 			}
 		}
-		dialog.dismiss();
+		
 		return result;
 	}
 
@@ -97,10 +96,28 @@ public class LoginRequestTask extends AsyncTask<KVEntry<String,String> , String 
 	@Override
 	protected void onPostExecute(String result) {
 		// TODO Auto-generated method stub
+		dialog.dismiss();
 		if(result != null){
-			Gson gson = new Gson();;
-			LoginResult result_fromjson = gson.fromJson(result, LoginResult.class);
+			Log.d(TAG, result);
+			Gson gson = new Gson();
+			LoginResult result_fromjson = gson.fromJson(result, LoginResult.class);			
 			if(result_fromjson.getStatus().equals("success")){
+				if(adialog != null)
+					adialog.dismiss();
+				
+				ProjectHelper helper = new ProjectHelper(mContext);
+				List<Project> projects = result_fromjson.getProjects();
+				//Log.w(TAG, "PROJECT SIZE = " + projects.size());
+				for(Project project : projects){
+					//Log.d(TAG, "Project = " + project);
+					long id = helper.add(project);
+					//Log.d(TAG, "Project added = " + id);
+				}
+				/**
+				 * clear project list to remove large amount of projects data
+				 * because were going to cache result and reuse
+				 */
+				result_fromjson.getProjects().clear();
 				
 				Utilities.saveLoginDetails(mContext, result_fromjson);
 				Intent i = new Intent(mContext , SlidingDashboard.class);
@@ -115,6 +132,14 @@ public class LoginRequestTask extends AsyncTask<KVEntry<String,String> , String 
 			}
 		}
 		super.onPostExecute(result);
+	}
+
+
+
+	private AlertDialog adialog;
+	public void setParentDialog(AlertDialog dialog2) {
+		// TODO Auto-generated method stub
+		this.adialog = dialog2;
 	}
 	
 	

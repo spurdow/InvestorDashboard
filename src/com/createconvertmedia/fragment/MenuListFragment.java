@@ -2,8 +2,14 @@ package com.createconvertmedia.fragment;
 
 import java.util.ArrayList;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +29,7 @@ import com.createconvertmedia.entity.User;
 import com.createconvertmedia.entry.KVEntry;
 import com.createconvertmedia.investordashboard.R;
 import com.createconvertmedia.investordashboard.SlidingDashboard;
+import com.createconvertmedia.investordashboard.SplashActivity;
 import com.createconvertmedia.tasks.MenuRequestTask;
 
 
@@ -33,6 +40,10 @@ public class MenuListFragment extends SherlockListFragment implements OnItemClic
 	private MenuListAdapter adapter;
 	
 	private ProgressBar large;
+	
+	private UpdateReceiver mreciever;
+	
+	private static final String TAG = MenuListFragment.class.getSimpleName();
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,8 +64,6 @@ public class MenuListFragment extends SherlockListFragment implements OnItemClic
 		menu.add(new Menu("Investor Dashboard"));
 		menu.add(new Menu("Share Purchase Transaction"));
 		menu.add(new Menu("Downloads"));
-		menu.add(new Menu("Investor Updates"));
-		menu.add(new Menu("My Messages"));
 		menu.add(new Menu("Logout"));
 		
 		View headerView = LayoutInflater.from(this.getActivity().getApplicationContext()).inflate(R.layout.my_account, null);
@@ -89,8 +98,10 @@ public class MenuListFragment extends SherlockListFragment implements OnItemClic
 		getListView().setOnItemClickListener(this);
 		
 		adapter = new MenuListAdapter(this.getActivity().getApplicationContext() ,menu);
-		setListAdapter(adapter);
 		
+		mreciever = new UpdateReceiver();
+		
+		setListAdapter(adapter);
 		
 	}
 
@@ -98,11 +109,53 @@ public class MenuListFragment extends SherlockListFragment implements OnItemClic
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
 		switch(arg2){
+		case 1 : ((SlidingDashboard) this.getActivity()).replace(new InvestorDashboardFragment()); break;
 		case 2 : ((SlidingDashboard) this.getActivity()).replace(new TransactionFragment()); break;
 		case 3 : ((SlidingDashboard) this.getActivity()).replace(new DownloadFragment()); break;
+		case 4 : ((SlidingDashboard) this.getActivity()).toggle();
+				Utilities.removeLoginDetails(getActivity());
+				Intent i = new Intent(getActivity() , SplashActivity.class);
+				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+				getActivity().startActivity(i);
+		break;
 		}
 		
 		
+	}
+	
+	private class UpdateReceiver extends BroadcastReceiver{
+		
+		
+
+		/*
+		 *  local broadcast reciever
+		 */
+		@Override
+		public void onReceive(final Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			
+			int id = intent.getIntExtra("not_id", -1);
+			Menu m = adapter.getObject(id);
+			m.setNotif_no(m.getNotif_no() + 1);
+			adapter.notifyDataSetChanged();
+			Log.d(TAG, "updating projects...");
+			
+		}
+		
+	}
+
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		LocalBroadcastManager.getInstance(this.getActivity()).unregisterReceiver(mreciever);
+		super.onPause();
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		LocalBroadcastManager.getInstance(this.getActivity()).registerReceiver(mreciever, new IntentFilter("new_project"));
+		super.onResume();
 	}
 	
 	

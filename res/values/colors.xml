@@ -5,4 +5,7 @@
     <color name="black_font">#000000</color>
     <color name="text_shadow">#7F000000</color>
     <color name="text_shadow_white">#FFFFFF</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="white">#A8A6A6</color>
+    <color name="light_blue">#66B8FF</color>
 </resources>

@@ -15,11 +15,11 @@ import com.createconvertmedia.commons.Utilities;
 import com.createconvertmedia.dbentity.DownloadHelper;
 import com.createconvertmedia.entity.Pdf_download;
 import com.createconvertmedia.entry.KVEntry;
-import com.createconvertmedia.iface.NotifyUpdate;
+import com.createconvertmedia.iface.INotifyUpdate;
 import com.createconvertmedia.investordashboard.R;
 import com.createconvertmedia.tasks.DownloadRequestTask;
 
-public class DownloadFragment extends SherlockListFragment implements NotifyUpdate{
+public class DownloadFragment extends SherlockListFragment implements INotifyUpdate{
 
 	private ProgressBar pBar;
 	private DownloadListAdapter adapter;
@@ -27,6 +27,7 @@ public class DownloadFragment extends SherlockListFragment implements NotifyUpda
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		this.setHasOptionsMenu(true);
 		View v = inflater.inflate(R.layout.content_layout, container , false);
 		pBar = (ProgressBar) v.findViewById(R.id.content_progressbar);
 		pBar.setVisibility(View.VISIBLE);
